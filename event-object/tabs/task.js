@@ -4,11 +4,11 @@ const arrayContents = [...document.getElementsByClassName('tab__content')];
 for (i = 0; i < arrayTabs.length; i++) {
     arrayTabs[i].addEventListener('click', (event) => {
         curTab = event.currentTarget;
-        curTab.classList.toggle('tab_active');
+        curTab.classList.add('tab_active');
         
         index = arrayTabs.indexOf(curTab);
         curContent = arrayContents[index];
-        curContent.classList.toggle('tab__content_active');
+        curContent.classList.add('tab__content_active');
 
         // деактивировать все табы, за исключением выбранного
         arrayTabs.forEach((element) => {
