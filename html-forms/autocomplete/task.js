@@ -81,12 +81,23 @@ class Autocomplete {
         value: 'Содержимое атрибута value'
       }
     */
-    return [
-      {
-        text: 'Чубакка',
-        value: '1'
-      }
-    ];
+    const curList = [...document.getElementsByClassName('autocomplete__input')][0];            
+    let res = [];
+    const collection = curList.options;
+    for (let i=0; i < collection.length; i++) {
+      let element = collection[i];
+      if (element.text.includes(text)) {
+        res.push(
+          {
+            'text': element.text,
+            'value': element.value
+          }
+        );
+      }       
+    }
+             
+    return  res;    
+    
   }
 }
 
