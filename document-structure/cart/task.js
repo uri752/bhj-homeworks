@@ -48,40 +48,37 @@ for (let i = 0; i < arrayProductAdd.length; i++) {
         let elCount = curParent.querySelector('.product__quantity-value');
         let curCount = +elCount.innerText;
 
-        // найти товар в корзине
-        let isFind = false;        
-        curElCart = document.getElementsByClassName('cart__product');
-        for (let j = 0; j <curElCart.length; j++) {
-            if (curElCart[j].getAttribute('data-id') == dataId) {                
-                let curElCartProductCount = curElCart[j].querySelector('.cart__product-count');
-                curCartProductCount = +curElCartProductCount.innerText;
-                curCartProductCount += curCount;
-                curElCartProductCount.innerText = curCartProductCount;
-                isFind = true;        
-                break;
-            }
-        }
-
-        // если товара еще нет в корзине, то добавить 
         
-        if (isFind) {
+        // найти товар в корзине        
+        // используем не императивный метод, а декларативный - функция find
+        curElCart = [...document.getElementsByClassName('cart__product')];        
+        curEl = curElCart.find((item) => {
+            return item.getAttribute('data-id') == dataId    
+        });        
+
+        // если товара найден, то изменить количество 
+        if (curEl) {
+            let curElCartProductCount = curEl.querySelector('.cart__product-count');
+            curCartProductCount = +curElCartProductCount.innerText;
+            curCartProductCount += curCount;
+            curElCartProductCount.innerText = curCartProductCount;
             return;
-        }
+        } else {
+            // иначе добавляем новый html-элемент 
+            let newCartProduct = document.createElement('div');
+            newCartProduct.classList.add('cart__product');
+            newCartProduct.setAttribute('data-id', dataId);
+            cartProducts.appendChild(newCartProduct);
+            
+            let newImg = document.createElement('img');
+            newImg.classList.add('cart__product-image');
+            newImg.setAttribute('src', srcImg);
+            newCartProduct.appendChild(newImg);
 
-        let newCartProduct = document.createElement('div');
-        newCartProduct.classList.add('cart__product');
-        newCartProduct.setAttribute('data-id', dataId);
-        cartProducts.appendChild(newCartProduct);
-        
-        let newImg = document.createElement('img');
-        newImg.classList.add('cart__product-image');
-        newImg.setAttribute('src', srcImg);
-        newCartProduct.appendChild(newImg);
-
-        let newCount = document.createElement('div');
-        newCount.classList.add('cart__product-count');
-        newCount.innerText = curCount;
-        newCartProduct.appendChild(newCount);
-    
+            let newCount = document.createElement('div');
+            newCount.classList.add('cart__product-count');
+            newCount.innerText = curCount;
+            newCartProduct.appendChild(newCount);
+        }    
     });
 }

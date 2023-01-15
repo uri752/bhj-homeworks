@@ -2,43 +2,20 @@
 const elTasks = document.getElementById('tasks');
 const elInput = document.getElementById('task__input');
 const buttonTaskAdd = document.getElementById('tasks__add');
+
 buttonTaskAdd.onclick = (event) => {    
-    event.preventDefault();
+    event.preventDefault();    
     addTask();
 };
 
-elInput.addEventListener('keydown', (e) => {
-        
-    if (e.keyCode != 13) {
-        return;
-    }
-    
-    addTask();
-});
-
-
 function addTask() {
-    
-    console.log('addTask()');
-
+       
     let textTodo = elInput.value;
     elInput.value = '';
     if (textTodo.trim() == '') {
         return;
     }
         
-    console.log(textTodo);
-    
-    /*elTasks.insertAdjacentHTML('afterEnd',
-    `<div class="task">
-        <div class="task__title">
-            ${textTodo}
-        </div>
-        <a href="#" class="task__remove">&times;</a>
-    </div>`);   
-    */
-    
-
     let newTodo = document.createElement('div');
     newTodo.classList.add('task');
     
