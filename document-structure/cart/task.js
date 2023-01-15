@@ -5,15 +5,11 @@ const cartProducts = document.querySelector('.cart__products');
 
 for (let i = 0; i < arrayControlDec.length; i++) {
     let curControl = arrayControlDec[i];
-    curControl.addEventListener('click', (event) => {
-        console.log(event);
+    curControl.addEventListener('click', (event) => {        
         let curEl = event.target; 
-        let curParent = curEl.parentNode;
-        console.log(curParent);
-        let curElValue = curParent.querySelector('.product__quantity-value');
-        console.log(curElValue);    
-        let curValue = +curElValue.innerText;
-        console.log(curValue);
+        let curParent = curEl.parentNode;        
+        let curElValue = curParent.querySelector('.product__quantity-value');        
+        let curValue = +curElValue.innerText;        
         curValue -= 1;
         if (curValue < 1) {
             curValue = 1;
@@ -26,12 +22,9 @@ for (let i = 0; i < arrayControlInc.length; i++) {
     let curControl = arrayControlInc[i];
     curControl.addEventListener('click', (event) => {        
         let curEl = event.target; 
-        let curParent = curEl.parentNode;
-        console.log(curParent);
-        let curElValue = curParent.querySelector('.product__quantity-value');
-        console.log(curElValue);
+        let curParent = curEl.parentNode;        
+        let curElValue = curParent.querySelector('.product__quantity-value');        
         let curValue = +curElValue.innerText;
-        console.log(curValue);
         curValue += 1;        
         curElValue.innerText = curValue;
     });

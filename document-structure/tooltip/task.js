@@ -7,22 +7,19 @@ for (let i = 0; i < arrayElHasTooltip.length; i++) {
         
         event.preventDefault(); // отключим стандартное поведение при клике на ссылку            
         
-        curEl = event.target;        
-        curTooltip = curEl.querySelector('.tooltip');
-        if (curTooltip) {
-            // если подсказка есть, то удалим ее
+        curEl = event.target;          
+        curTitle = curEl.getAttribute('title');                        
+
+        curTooltip = document.querySelector('.tooltip');
+        if (curTooltip && curTooltip.innerHTML === curTitle) {
+            // если подсказка есть для этого элемента, то удалим ее
             curTooltip.remove();            
         } else {
-            // иначе создаем ее 
-            curTitle = curEl.getAttribute('title');                        
+            // иначе создаем ее             
             curTooltip = document.createElement('div');
             curTooltip.classList.add('tooltip');
             curTooltip.classList.toggle('tooltip_active');
-            curTooltip.innerHTML =  curTitle;
-            
-            //curEl.appendChild(curTooltip);   
-            //curEl.append(curTooltip);   
-            //вставляем не как дочерний, а после нашего элемента 
+            curTooltip.innerHTML =  curTitle;                        
             curEl.insertAdjacentElement('afterend',curTooltip);
             
             let coords = curEl.getBoundingClientRect();
